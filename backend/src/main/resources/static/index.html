@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Auth0 lock script -->
+    <script src="https://cdn.auth0.com/js/lock/10.8/lock.min.js"></script>
+
+    <!-- Setting the right viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+<p>Some public link: <a href="/public">link</a></p>
+<button id="btn-login">Login with Auth0</button>
+<button id="btn-logout" style="display: none;">Logout</button>
+<button id="btn-secure" style="display: none;">Secure</button>
+<div id="avatar"></div>
+<div id="nickname"></div>
+<div id="result"></div>
+<script>
+    (function() {
+        var lock = new Auth0Lock('LtiwyfY1Y2ANJerCNTIbT7vVsX5zKBS5', 'bkrebs.auth0.com');
+
+        var btn_login = document.getElementById('btn-login');
+        var btn_logout = document.getElementById('btn-logout');
+        var btn_secure = document.getElementById('btn-secure');
+
+        var JWT = null;
+
+        btn_login.addEventListener('click', function() {
+            lock.show();
+        });
+
+        btn_logout.addEventListener('click', function() {
+            localStorage.removeItem('id_token');
+            window.location.href = "/";
+        });
+
+        btn_secure.addEventListener('click', function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/secure", true);
+            xhttp.setRequestHeader('Authorization', 'Bearer ' + JWT);
+            xhttp.send();
+        });
+
+        lock.on("authenticated", function(authResult) {
+            lock.getProfile(authResult.idToken, function(error, profile) {
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+                localStorage.setItem('id_token', authResult.idToken);
+                JWT = authResult.idToken;
+                // Display user information
+                show_profile_info(profile);
+            });
+        });
+
+        function show_profile_info(profile) {
+            var avatar = document.getElementById('avatar');
+            document.getElementById('nickname').textContent = profile.nickname;
+            btn_login.style.display = "none";
+            btn_logout.style.display = "block";
+            btn_secure.style.display = "block";
+            avatar.src = profile.picture;
+            avatar.style.display = "block";
+        }
+    }());
+</script>
+</body>
+</html>
