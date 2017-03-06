@@ -12,7 +12,7 @@ cd backend
 mvn clean package
 
 # runs as a standalone Java app
-java -jar migrate-stormpath-auth0-0.0.1-SNAPSHOT.jar --auth0.clientSecret=YOUR_SECRET_KEY 
+java -jar target/migrate-stormpath-auth0-0.0.1-SNAPSHOT.jar --auth0.clientSecret=YOUR_SECRET_KEY 
 ```
 
 Or you can run it with Spring Boot maven plugin:
