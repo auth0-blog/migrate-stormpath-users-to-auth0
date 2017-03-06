@@ -2,6 +2,7 @@ package com.auth0.migration;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -9,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class Endpoints {
 
     @RequestMapping("/public")
-    String getPublicEndpoint() {
-        return "I'm publicly available to anyone in the world!";
+    @ResponseBody Message getPublicEndpoint() {
+        return new Message("Publicly available to the world!");
     }
 
     @RequestMapping("/secure")
-    String getSecureEndpoint() {
-        return "Available to users with JWTs issued by Auth0!";
+    @ResponseBody
+    Message getSecureEndpoint() {
+        return new Message("Available to logged in users only!");
     }
 }
