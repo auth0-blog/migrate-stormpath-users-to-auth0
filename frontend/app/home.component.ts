@@ -10,11 +10,19 @@ import 'rxjs/add/operator/catch';
 @Component({
   selector: 'home',
   template: `
-    <h4 *ngIf="auth.authenticated()">You are logged in</h4>
-    <h4 *ngIf="!auth.authenticated()">You are not logged in, please click 'Log in' button to login</h4>
-
-    <h1><a (click)="callPublicAPI()">Call Public API</a></h1>
-    <h1><a (click)="callPrivateAPI()">Call Private API</a></h1>
+    <div class="text-center">
+      <h4 *ngIf="auth.authenticated()">You are logged in</h4>
+      <h4 *ngIf="!auth.authenticated()">You are not logged in, please click 'Log in' button to login</h4>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-2">
+        <a class="btn btn-success btn-block" (click)="callPublicAPI()">Call Public API</a>
+      </div>
+      <div class="col-sm-4">
+        <a class="btn btn-block" [ngClass]="{'btn-success':auth.authenticated(), 'btn-danger':!auth.authenticated()}" (click)="callPrivateAPI()">Call Private API</a>
+      </div>
+    </div>
   `
 })
 
