@@ -1,22 +1,33 @@
-# migrate-stormpath-users-to-auth0
+## Migrating Stormpath Users to Auth0 Demo
 
-## Building and Running Spring Boot Project
+This is a demo application to showcase how users can migrate their existing Stormpath users to Auth0. There are specific readme files in the respective `frontend` and `backend` folders showing you how to build each project.
 
-Our backend is a Spring Boot project that is located in the `backend` folder. To build it run the following commands:
+This project is meant to be used with the following [tutorial](https://auth0.com/blog/how-to-migrate-your-existing-stormpath-users-to-auth0/).
 
-```sh
-cd backend
+## What is Auth0?
 
-# this cleans all generated resources and build from scratch
-# it also downloads all libraries that the project depends on
-mvn clean package
+Auth0 helps you to:
 
-# runs as a standalone Java app
-java -jar target/migrate-stormpath-auth0-0.0.1-SNAPSHOT.jar --auth0.secret=YOUR_SECRET_KEY 
-```
+* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, amont others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
+* Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
+* Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
+* Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
+* Analytics of how, when and where users are logging in.
+* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
 
-Or you can run it with Spring Boot maven plugin:
+## Create a Free Auth0 Account
 
-```sh
-mvn spring-boot:run -Drun.arguments="--auth0.clientSecret=YOUR_SECRET_KEY"
-```
+1. Go to [Auth0](https://auth0.com) and click Sign Up.
+2. Use Google, GitHub or Microsoft Account to login.
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/whitehat) details the procedure for disclosing security issues.
+
+## Author
+
+[Auth0](auth0.com)
+
+## License
+
+This project is licensed under the MIT license.
