@@ -22,8 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/public").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/public").permitAll()
+                .antMatchers("/secure").authenticated();
 
         JwtWebSecurityConfigurer
                 .forHS256(audience, issuer, secret.getBytes())
